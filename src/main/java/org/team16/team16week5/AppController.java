@@ -1,4 +1,4 @@
-package org.team16.team16week4;
+package org.team16.team16week5;
 
 import java.io.IOException;
 import java.util.Scanner;

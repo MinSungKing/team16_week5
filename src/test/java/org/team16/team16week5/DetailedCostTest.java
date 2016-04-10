@@ -1,4 +1,6 @@
-package org.team16.team16week4;
+package org.team16.team16week5;
+
+import org.team16.team16week5.Bill;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
