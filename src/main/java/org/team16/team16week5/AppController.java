@@ -10,12 +10,22 @@ public class AppController {
 	private static final Logger logger = Logger.getLogger(Bill.class.getName());
 	private FileHandler fileHandler;
 	private Scanner sc;
+	private String inputData;
+	
 	public AppController()
 	{
-		sc = new Scanner(System.in);
 		addFileHandler(logger);
 	}
-	public void run()
+	public void changeInputData(String inputData)
+	{
+		this.inputData = inputData;
+
+		if(inputData == null)
+			sc = new Scanner(System.in);
+		else
+			sc = new Scanner(inputData);
+	}
+	public boolean run()
 	{
 		while(true)
 		{
@@ -28,12 +38,24 @@ public class AppController {
 			{
 				logger.log(Level.INFO, "Type a sequence. Gold or Silver, Usage of minutes, Usage of lines (ex : Gold 900 1)");
 				String planType = sc.next();
+				
+				if( !(planType.equals("Gold") || planType.equals("Silver")))
+				{
+					logger.log(Level.INFO, "\nERROR!!\nType must be Gold or Silver\n\n");
+					return false;
+				}
+				
 				int usedMinutes = sc.nextInt();
 				int numberOfLines = sc.nextInt();
-				
-				if (numberOfLines < 0)	
+				if (usedMinutes <= 0)
 				{
-					logger.log(Level.INFO, "\nERROR!!\nNegative number cannot be used for line number\n\n");
+					logger.log(Level.INFO, "\nERROR!!\nNegative number or Zero cannot be used for minutes\n\n");
+					return false;
+				}
+				else if (numberOfLines <= 0)	
+				{
+					logger.log(Level.INFO, "\nERROR!!\nNegative number or Zero cannot be used for line number\n\n");
+					return false;
 				}
 				else
 				{
@@ -47,14 +69,16 @@ public class AppController {
 			{
 				logger.log(Level.INFO, "======================End Program======================");
 					
-				break;
+				return true;
 			}
 			else
 			{
 				logger.log(Level.INFO, "\nERROR!!\nWrong menu choosed\n\n");
+				return false;
 			}
 		}
 	}
+	
 	private void addFileHandler(Logger logger)
 	{
 		try
