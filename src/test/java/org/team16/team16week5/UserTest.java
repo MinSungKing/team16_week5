@@ -41,7 +41,7 @@ public class UserTest {
 	
 	@Test
 	public void testGoldUserFamilyDiscout(){
-		assertEquals(false, goldUser.getFamilyDiscount());
+		assertEquals(true, goldUser.getFamilyDiscount());
 	}
 	
 	@Test
