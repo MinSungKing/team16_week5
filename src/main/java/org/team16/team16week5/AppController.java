@@ -10,7 +10,6 @@ public class AppController {
 	private static final Logger logger = Logger.getLogger(Bill.class.getName());
 	private FileHandler fileHandler;
 	private Scanner sc;
-	private String inputData;
 	
 	public AppController()
 	{
@@ -18,8 +17,6 @@ public class AppController {
 	}
 	public void changeInputData(String inputData)
 	{
-		this.inputData = inputData;
-
 		if(inputData == null)
 			sc = new Scanner(System.in);
 		else
@@ -39,15 +36,15 @@ public class AppController {
 				logger.log(Level.INFO, "Type a sequence. Gold or Silver, Usage of minutes, Usage of lines (ex : Gold 900 1)");
 				String planType = sc.next();
 				
-				if( !(planType.equals("Gold") || planType.equals("Silver")))
+				
+				int usedMinutes = sc.nextInt();
+				int numberOfLines = sc.nextInt();
+				if( !("Gold".equals(planType) || "Silver".equals(planType)))
 				{
 					logger.log(Level.INFO, "\nERROR!!\nType must be Gold or Silver\n\n");
 					return false;
 				}
-				
-				int usedMinutes = sc.nextInt();
-				int numberOfLines = sc.nextInt();
-				if (usedMinutes <= 0)
+				else if (usedMinutes <= 0)
 				{
 					logger.log(Level.INFO, "\nERROR!!\nNegative number or Zero cannot be used for minutes\n\n");
 					return false;
