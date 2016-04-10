@@ -54,6 +54,14 @@ public class DetailedCostTest{
         assertEquals(139.3, getTotalCost(), 0.01);
 	}
 	@Test
+	public void testGoldBillCase4()
+	{
+		setBillInfo(GOLD, 1123, 3);
+        assertEquals(2*14.50, getAdditionalLineCost(), 0.01);
+        assertEquals(123*0.45, getOverExcessMinutesCost(), 0.01);
+        assertEquals(134.3, getTotalCost(), 0.01);
+	}
+	@Test
 	public void testSilverBillCase1()
 	{
 		setBillInfo(SILVER, 523, 2);
