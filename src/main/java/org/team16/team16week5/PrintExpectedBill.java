@@ -1,5 +1,6 @@
 package org.team16.team16week5;
 
+
 public class PrintExpectedBill {
 
 	private DetailedCost detailedCost;
@@ -10,16 +11,23 @@ public class PrintExpectedBill {
 	
 	public String printTotalCostEvaluation(){
 		String expression = Double.toString(this.detailedCost.getUserData().getUserPlan().getBasicMonthlyRate());
-		
+		boolean expressionChanged = false;
 		String excessMinuteForm = printOverExcessMinutesCostEvaluation();
-		if (excessMinuteForm != null)
+		if (excessMinuteForm != null){
 			expression += excessMinuteForm;
+			expressionChanged = true;
+		}
 		
 		String additionalLineForm = printAdditionalLineCostEvaluation();
-		if (additionalLineForm != null)
+		if (additionalLineForm != null){
 			expression += additionalLineForm;
+			expressionChanged = true;
+		}
 	
-		return expression + " = " + String.format("%.2f", this.detailedCost.getTotalCost());
+		if (expressionChanged)
+			return expression + " = " + String.format("%.2f", this.detailedCost.getTotalCost());
+
+		return String.format("%.2f", this.detailedCost.getTotalCost());
 	}
 	
 	public String printOverExcessMinutesCostEvaluation(){
@@ -41,7 +49,7 @@ public class PrintExpectedBill {
 			if(this.detailedCost.getUserData().getNumberOfLines()==2)
 				return " + " + this.detailedCost.getUserData().getUserPlan().getAdditionalLineRate();
 			else
-				return " + (" + this.detailedCost.getUserData().getNumberOfLines() + "*" + this.detailedCost.getUserData().getUserPlan().getAdditionalLineRate() + ")"; 
+				return " + (" + (this.detailedCost.getUserData().getNumberOfLines()-1) + "*" + this.detailedCost.getUserData().getUserPlan().getAdditionalLineRate() + ")"; 
 		}
 	}
 }
