@@ -33,7 +33,7 @@ public class AppController {
 				
 			if(choose == 1)
 			{
-				if(getInputUserData() == false)
+				if( !getInputUserData())
 					return false;
 			}
 			else if(choose == 2)
