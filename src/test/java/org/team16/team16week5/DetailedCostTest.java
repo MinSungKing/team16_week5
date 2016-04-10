@@ -2,53 +2,88 @@ package org.team16.team16week5;
 
 import org.team16.team16week5.Bill;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
 
-public class DetailedCostTest extends TestCase{
+import org.junit.Test;
 
-	public DetailedCostTest(String testName)
+public class DetailedCostTest{
+	public static final String gold = "Gold";
+	public static final String silver = "Silver";
+	private Bill bill;
+	
+	private void setBillInfo(String type, int minute, int line)
 	{
-		super(testName);
+		this.bill = new Bill(type, minute, line);
 	}
-    public static Test suite()
-    {
-        return new TestSuite( DetailedCostTest.class );
-    }
-    public void testApp()
-    {
-    	String gold = "Gold";
-    	String silver = "Silver";
-        Bill testBill = new Bill(gold, 878, 4);
-        assertEquals(2*14.50 + 5.00, testBill.getDetailedCostObject().getAdditionalLineCost(), 0.01);
-        assertEquals(0 ,testBill.getDetailedCostObject().getOverExcessMinutesCost(), 0.01);
-        assertEquals(83.95,testBill.getDetailedCostObject().getTotalCost(),0.01);
-        testBill.drawBill();
-        testBill = new Bill(gold, 1123, 1);
-        assertEquals(0, testBill.getDetailedCostObject().getAdditionalLineCost(), 0.01);
-        assertEquals(123*0.45 ,testBill.getDetailedCostObject().getOverExcessMinutesCost(), 0.01);
-        assertEquals(105.3,testBill.getDetailedCostObject().getTotalCost(),0.01);
-        testBill.drawBill();
-        testBill = new Bill(gold, 1123, 4);
-        assertEquals((2*14.50) + 5.00, testBill.getDetailedCostObject().getAdditionalLineCost(), 0.01);
-        assertEquals(123*0.45 ,testBill.getDetailedCostObject().getOverExcessMinutesCost(), 0.01);
-        assertEquals(139.3,testBill.getDetailedCostObject().getTotalCost(),0.01);
-        testBill.drawBill();
-        testBill = new Bill(silver, 523, 2);
-        assertEquals(21.50, testBill.getDetailedCostObject().getAdditionalLineCost(), 0.01);
-        assertEquals(23*0.54 ,testBill.getDetailedCostObject().getOverExcessMinutesCost(), 0.01);
-        assertEquals(63.87,testBill.getDetailedCostObject().getTotalCost(),0.01);
-        testBill.drawBill();
-        testBill = new Bill(silver, 44, 5);
-        assertEquals((2*21.50) + (2*5.00), testBill.getDetailedCostObject().getAdditionalLineCost(), 0.01);
-        assertEquals(0 ,testBill.getDetailedCostObject().getOverExcessMinutesCost(), 0.01);
-        assertEquals(82.95,testBill.getDetailedCostObject().getTotalCost(),0.01);
-        testBill.drawBill();
-        testBill = new Bill(silver, 521, 5);
-        assertEquals((2*21.50)+(2*5.00), testBill.getDetailedCostObject().getAdditionalLineCost(), 0.01);
-        assertEquals(21*0.54 ,testBill.getDetailedCostObject().getOverExcessMinutesCost(), 0.01);
-        assertEquals(94.29,testBill.getDetailedCostObject().getTotalCost(),0.01);
-        testBill.drawBill();
-    }
+	
+	private double getAdditionalLineCost()
+	{
+		return bill.getDetailedCostObject().getAdditionalLineCost();
+	}
+	private double getOverExcessMinutesCost()
+	{
+		return bill.getDetailedCostObject().getOverExcessMinutesCost();
+	}
+	private double getTotalCost()
+	{
+		return bill.getDetailedCostObject().getTotalCost();
+	}
+	private void writeBillResultToLog()
+	{
+		bill.drawBill();
+	}
+	@Test
+	public void testGoldBill_case1()
+	{
+		setBillInfo(gold, 878, 4);
+        assertEquals(2*14.50 + 5.00, getAdditionalLineCost(), 0.01);
+        assertEquals(0 , getOverExcessMinutesCost(), 0.01);
+        assertEquals(83.95, getTotalCost(),0.01);
+        writeBillResultToLog();
+	}
+	@Test
+	public void testGoldBill_case2()
+	{
+		setBillInfo(gold, 1123, 1);
+        assertEquals(0, getAdditionalLineCost(), 0.01);
+        assertEquals(123*0.45 , getOverExcessMinutesCost(), 0.01);
+        assertEquals(105.3, getTotalCost(),0.01);
+        writeBillResultToLog();
+	}
+	@Test
+	public void testGoldBill_case3()
+	{
+		setBillInfo(gold, 1123, 4);
+        assertEquals((2*14.50) + 5.00, getAdditionalLineCost(), 0.01);
+        assertEquals(123*0.45 , getOverExcessMinutesCost(), 0.01);
+        assertEquals(139.3, getTotalCost(), 0.01);
+        writeBillResultToLog();
+	}
+	@Test
+	public void testGoldBill_case4()
+	{
+		setBillInfo(silver, 523, 2);
+        assertEquals(21.50, getAdditionalLineCost(), 0.01);
+        assertEquals(23*0.54 , getOverExcessMinutesCost(), 0.01);
+        assertEquals(63.87, getTotalCost(),0.01);
+        writeBillResultToLog();
+	}
+	@Test
+	public void testGoldBill_case5()
+	{
+		setBillInfo(silver, 44, 5);
+        assertEquals((2*21.50) + (2*5.00), getAdditionalLineCost(), 0.01);
+        assertEquals(0 , getOverExcessMinutesCost(), 0.01);
+        assertEquals(82.95, getTotalCost(),0.01);
+        writeBillResultToLog();
+	}
+	@Test
+	public void testGoldBill_case6()
+	{
+		setBillInfo(silver, 521, 5);
+        assertEquals((2*21.50) + (2*5.00), getAdditionalLineCost(), 0.01);
+        assertEquals(21*0.54, getOverExcessMinutesCost(), 0.01);
+        assertEquals(94.29, getTotalCost(),0.01);
+        writeBillResultToLog();
+	}
 }
