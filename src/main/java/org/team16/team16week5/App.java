@@ -6,7 +6,7 @@ package org.team16.team16week5;
  */
 public class App 
 {
-	public App(){
+	private App(){
 	}
     public static void main( String[] args )
     {
