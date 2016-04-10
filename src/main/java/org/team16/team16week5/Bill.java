@@ -14,10 +14,6 @@ public class Bill {
 	{
 		return this.detailedCostObject;
 	}
-	public User getUserObject()
-	{
-		return this.userObject;
-	}
 	
 	private void initBill(String planName, int usedMinutes, int numberOfLines)
 	{
