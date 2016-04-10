@@ -32,6 +32,18 @@ public class AppControllerTest {
 		assertEquals(true, appController.run());
 	}
 	@Test
+	public void testAppControllerPassCase4()
+	{
+		initAppController("1 Gold 1123 4 2");
+		assertEquals(true, appController.run());
+	}
+	@Test
+	public void testAppControllerPassCase5()
+	{
+		initAppController("1 Silver 1123 3 2");
+		assertEquals(true, appController.run());
+	}
+	@Test
 	public void testAppControllerFailCase1()
 	{
 		initAppController("3");
