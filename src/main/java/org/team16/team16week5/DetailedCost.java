@@ -34,7 +34,7 @@ public class DetailedCost {
 		if(this.userData.getNumberOfLines() == 1 || this.userData.getNumberOfLines()==2 ){
 			this.additionalLineCost =  (this.userData.getNumberOfLines()-1)*this.userData.getUserPlan().getAdditionalLineRate();
 		}
-		else if(this.userData.getNumberOfLines() > 2){
+		if(this.userData.getNumberOfLines() > 2){
 			this.additionalLineCost =  2*this.userData.getUserPlan().getAdditionalLineRate() + (this.userData.getNumberOfLines()-3)*5;
 		}
 	}
